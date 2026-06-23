@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isaque Batista | Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8; /* Azul pastel bem claro para o fundo */
+            color: #334e68; /* Azul escuro acinzentado para o texto */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ANIMAÇÃO DE ENTRADA DA PÁGINA */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ANIMAÇÃO PARA O GRADIENTE DA BORDA DO HEADER */
+        @keyframes borderGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 35px 10px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Borda animada inferior com gradiente sutil */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, #486581, #bcccdc, #102a43, #486581);
+            background-size: 300% 300%;
+            animation: borderGradient 6s ease infinite;
+            border-radius: 2px;
+        }
+
+        /* Efeito de Escala e Brilho no Nome Principal */
+        header h1 {
+            font-size: 2.2rem;
+            color: #102a43;
+            margin-bottom: 8px;
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        header h1:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(16, 42, 67, 0.2); /* Brilho sutil */
+            color: #000000;
+        }
+
+        /* Efeito de expansão de letras no Subtítulo */
+        header p {
+            font-size: 1rem;
+            color: #627d98;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: letter-spacing 0.4s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        header p:hover {
+            letter-spacing: 4px; /* Afasta as letras ao passar o mouse */
+            color: #102a43;
+        }
+
+        /* CONTEÚDO PRINCIPAL */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 40px 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* CARDS COM EFEITO DE ELEVAÇÃO */
+        .about-section, .stack-section {
+            background-color: #ffffff;
+            padding: 26px;
+            border-radius: 16px;
+            border: 2px solid #d9e2ec;
+            box-shadow: 0 4px 6px rgba(16, 42, 67, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .about-section:hover, .stack-section:hover {
+            transform: translateY(-4px); /* Eleva o card levemente */
+            box-shadow: 0 12px 20px rgba(16, 42, 67, 0.08);
+            border-color: #bcccdc;
+        }
+
+        /* Efeito de Linha Expansiva nos Títulos H2 */
+        .about-section h2, .stack-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+            color: #102a43;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .about-section h2::after, .stack-section h2::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #486581;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .about-section h2:hover::after, .stack-section h2:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Efeito de realce no parágrafo "Sobre mim" */
+        .about-section p {
+            color: #486581;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .about-section p:hover {
+            color: #102a43;
+            transform: translateX(4px); /* Move levemente para o lado */
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+        }
+
+        /* ANIMAÇÃO AVANÇADA NOS BADGES */
+        .stack-list li {
+            background-color: #bcccdc;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #102a43;
+            border: 1px solid #9fb3c8;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stack-list li:hover {
+            transform: scale(1.12) translateY(-4px); /* Aumenta e sobe mais */
+            background-color: #102a43; /* Inverte a cor de fundo */
+            color: #ffffff; /* Letra fica branca */
+            box-shadow: 0 6px 12px rgba(16, 42, 67, 0.15);
+        }
+
+        /* CALL TO ACTION BUTTON WITH SHINE EFFECT */
+        .cta-container {
+            margin-top: 15px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .btn-email {
+            display: inline-block;
+            width: 100%;
+            background-color: #486581;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #334e68;
+            box-shadow: 0 4px 12px rgba(72, 101, 129, 0.2);
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-email:hover {
+            background-color: #334e68;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(72, 101, 129, 0.4);
+        }
+
+        .btn-email:active {
+            transform: scale(0.98) translateY(0);
+            background-color: #102a43;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px 10px 10px 10px;
+            border-top: 2px solid #d9e2ec;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        /* Link do GitHub com efeito de balanço */
+        .github-link {
+            color: #102a43;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .github-link:hover {
+            color: #486581;
+            transform: scale(1.1) rotate(-2deg); /* Dá uma leve inclinada de leve */
+        }
+
+        .catchphrases {
+            font-size: 0.85rem;
+            color: #627d98;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            line-height: 1.4;
+        }
+
+        /* Animação nos textos finais */
+        .catchphrases span {
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .catchphrases span:hover {
+            color: #102a43;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Isaque Batista</h1>
+        <p>Software Developer</p>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <!-- About -->
+        <section class="about-section">
+            <h2>Sobre mim</h2>
+            <p>Apaixonado por Jogos e Tecnologia.</p>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="stack-section">
+            <h2>Tecnologias & Stack</h2>
+            <ul class="stack-list">
+                <li>Python</li>
+                <li>JavaScript</li>
+                <li>HTML</li>
+                <li>CSS</li>
+            </ul>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta-container">
+            <a href="mailto:isaquebatista.js@gmail.com" class="btn-email">Entre em contato por E-mail</a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="https://github.com/isaquebatistajs" target="_blank" class="github-link">Meu GitHub</a>
+        
+        <div class="catchphrases">
+            <span>🔒 Todos os direitos reservados</span>
+            <span>🇧🇷 Tecnologia brasileira</span>
+        </div>
+    </footer>
+
+</body>
+</html>
